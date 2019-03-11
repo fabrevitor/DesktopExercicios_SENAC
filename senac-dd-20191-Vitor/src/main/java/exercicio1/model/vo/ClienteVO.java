@@ -37,7 +37,7 @@ public class ClienteVO{
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	public int[] getTelefone() {
+	public String[] getTelefone() {
 		return telefone;
 	}
 	public void setTelefone(String[] telefone) {
