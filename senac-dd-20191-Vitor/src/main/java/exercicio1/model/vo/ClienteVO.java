@@ -4,14 +4,14 @@ public class ClienteVO{
 	private int cpf;
 	private String nome;
 	private int idade;
-	private int[] telefone;
+	private String[] telefone;
 	private EnderecoVO endereco;
 	
 	public ClienteVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ClienteVO(int cpf, String nome, int idade, int[] telefone, EnderecoVO endereco) {
+	public ClienteVO(int cpf, String nome, int idade, String[] telefone, EnderecoVO endereco) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;
@@ -40,7 +40,7 @@ public class ClienteVO{
 	public int[] getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int[] telefone) {
+	public void setTelefone(String[] telefone) {
 		this.telefone = telefone;
 	}
 	public EnderecoVO getEndereco() {
