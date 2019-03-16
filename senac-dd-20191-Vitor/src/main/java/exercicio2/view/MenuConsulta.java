@@ -9,7 +9,7 @@ import exercicio2.model.vo.Usuario;
 public class MenuConsulta{
 	
 	public void apresentarMenuConsulta(ArrayList<Usuario> usuarios) {
-		for(int i = 0; i > usuarios.size(); i++) {
+		for(int i = 0; i < usuarios.size(); i++) {
 			Usuario usuarioImprimir = new Usuario();
 			usuarioImprimir.setId(usuarios.get(i).getId());
 			usuarioImprimir.setNome(usuarios.get(i).getNome());
