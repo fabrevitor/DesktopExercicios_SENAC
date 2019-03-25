@@ -1,13 +1,13 @@
 package exercicio2.model.vo;
 
-public class Usuario {
+public class UsuarioVO{
 	private int id;
 	private String nome;
 	private String email;
 	private String senha;
 	private int nivel;
 	
-	public Usuario(int id, String nome, String email, String senha, int nivel) {
+	public UsuarioVO(int id, String nome, String email, String senha, int nivel) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -15,7 +15,7 @@ public class Usuario {
 		this.senha = senha;
 		this.nivel = nivel;
 	}
-	public Usuario() {
+	public UsuarioVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
