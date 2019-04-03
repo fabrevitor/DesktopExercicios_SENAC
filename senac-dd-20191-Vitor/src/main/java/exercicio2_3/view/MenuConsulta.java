@@ -1,13 +1,9 @@
-package exercicio2.view;
-
+package exercicio2_3.view;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
-import exercicio2.model.vo.UsuarioVO;
-
+import exercicio2_3.model.vo.UsuarioVO;
 public class MenuConsulta{
-	
 	public void apresentarMenuConsulta(ArrayList<UsuarioVO> usuarios) {
 		for(int i = 0; i < usuarios.size(); i++) {
 			UsuarioVO usuarioImprimir = new UsuarioVO();
@@ -15,7 +11,6 @@ public class MenuConsulta{
 			usuarioImprimir.setNome(usuarios.get(i).getNome());
 			usuarioImprimir.setEmail(usuarios.get(i).getEmail());
 			usuarioImprimir.setSenha(usuarios.get(i).getSenha());
-			
 			JOptionPane.showMessageDialog(null, usuarioImprimir.toString());
 	}
 }

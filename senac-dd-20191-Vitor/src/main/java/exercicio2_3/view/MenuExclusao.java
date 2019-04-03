@@ -1,11 +1,8 @@
-package exercicio2.view;
-
+package exercicio2_3.view;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
-import exercicio2.model.vo.UsuarioVO;
-
+import exercicio2_3.model.vo.UsuarioVO;
 public class MenuExclusao {
 	public void apresentarMenuExclusao(ArrayList<UsuarioVO> usuarios) {
 		int idExcluir = Integer.parseInt((String) JOptionPane.showInputDialog(null,"Digite o id do usuário a ser excluído: ",

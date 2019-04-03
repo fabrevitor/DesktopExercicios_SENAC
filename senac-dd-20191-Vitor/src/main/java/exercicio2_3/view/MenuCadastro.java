@@ -1,11 +1,10 @@
-package exercicio2.view;
-
+package exercicio2_3.view;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import exercicio2.model.vo.UsuarioVO;
 
+import exercicio2_3.controller.UsuarioController;
+import exercicio2_3.model.vo.UsuarioVO;
 public class MenuCadastro {
-	int id = 0;
 	public void apresentarMenuCadastro(ArrayList<UsuarioVO> usuarios) {
 		int continuar = 0;
 			while (continuar == 0) {
@@ -15,13 +14,14 @@ public class MenuCadastro {
 						"Cadastro Email", JOptionPane.PLAIN_MESSAGE, Menu.icon, null, "Digite aqui"));
 				String senha = (String) (JOptionPane.showInputDialog(null, "Digite a senha a ser cadastrada: ", 
 						"Cadastro Senha", JOptionPane.PLAIN_MESSAGE, Menu.icon, null, "Digite aqui"));
-				int nivel = Integer.parseInt((String) (JOptionPane.showInputDialog(null, "Digite o nível(1-ADMIN, 2-NORMAL): ", 
+				String confirmacao = (String) (JOptionPane.showInputDialog(null, "Digite a senha novamente: ", 
+						"Cadastro Confirmação Senha", JOptionPane.PLAIN_MESSAGE, Menu.icon, null, "Digite aqui"));
+				int idNivel = Integer.parseInt((String) (JOptionPane.showInputDialog(null, "Digite o nível(1-ADMIN, 2-NORMAL): ", 
 						"Cadastro Nível", JOptionPane.PLAIN_MESSAGE, Menu.icon, null, "Digite aqui")));
-				UsuarioVO usuario = new UsuarioVO(id, nome, email, senha,nivel);
-				JOptionPane.showMessageDialog(null,"Usuário cadastrado com sucesso!\n" + usuario.toString(), "Confirmação de cadastro",
-				           JOptionPane.PLAIN_MESSAGE);
-				id = id + 1;
-				usuarios.add(usuario);
+				
+				UsuarioController controller = new UsuarioController();
+				controller.cadastrarUsuarioController(nome, email, senha,confirmacao, idNivel);
+				
 				int sair = (JOptionPane.showConfirmDialog(null,"Deseja cadastrar mais um usuário?", 
 						"Cadastro Usuário", JOptionPane.YES_NO_OPTION));
 				switch(sair) {
@@ -37,4 +37,6 @@ public class MenuCadastro {
 		}
 	}	
 }
+
+
 

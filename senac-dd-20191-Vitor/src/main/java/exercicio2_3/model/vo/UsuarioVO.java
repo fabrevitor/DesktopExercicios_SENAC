@@ -1,15 +1,13 @@
-package exercicio2.model.vo;
-
+package exercicio2_3.model.vo;
 public class UsuarioVO{
 	private int id;
 	private String nome;
 	private String email;
 	private String senha;
-	private int nivel;
+	private NivelVO nivel;
 	
-	public UsuarioVO(int id, String nome, String email, String senha, int nivel) {
+	public UsuarioVO(String nome, String email, String senha, NivelVO nivel) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
@@ -43,10 +41,10 @@ public class UsuarioVO{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public int getNivel() {
+	public NivelVO getNivel() {
 		return nivel;
 	}
-	public void setNivel(int nivel) {
+	public void setNivel(NivelVO nivel) {
 		this.nivel = nivel;
 	}
 	@Override
@@ -54,7 +52,6 @@ public class UsuarioVO{
 		return "ID: " + id + "\nNome: " + nome + 
 				"\nEmail: " + email + 
 				"\nSenha: " + senha + 
-				"\nNivel: " + nivel;
+				 nivel.toString();
 	}
-	
 }

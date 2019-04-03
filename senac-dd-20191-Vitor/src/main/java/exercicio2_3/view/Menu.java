@@ -1,7 +1,5 @@
-package exercicio2.view;
-
+package exercicio2_3.view;
 import javax.swing.ImageIcon;
-
 public class Menu {
 	public static final int MENU_CADASTRO = 1;
 	public static final int MENU_EXCLUSAO = 2;
