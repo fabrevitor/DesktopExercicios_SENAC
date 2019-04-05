@@ -14,7 +14,7 @@ public class UsuarioController {
 			novoUsuario.setNome(nome);
 			novoUsuario.setEmail(email);
 			novoUsuario.setSenha(senha);
-			novoUsuario.getNivel().setId(idNivel);
+			novoUsuario.getNivel().setIdNivel(idNivel);
 			
 			UsuarioBO bo = new UsuarioBO();
 			mensagem = bo.cadastrar(novoUsuario);

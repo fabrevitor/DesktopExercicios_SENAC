@@ -27,6 +27,7 @@ public class UsuarioDAO {
 		}
 		return false;
 	}
+	
 	public int cadastrarUsuarioDAO(UsuarioVO usuario) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);

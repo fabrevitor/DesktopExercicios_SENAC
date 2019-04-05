@@ -1,5 +1,7 @@
 package exercicio4.model.vo;
 
+import exercicio2_3.model.vo.NivelVO;
+
 public class UsuarioVO{
 	private int id;
 	private String nome;
