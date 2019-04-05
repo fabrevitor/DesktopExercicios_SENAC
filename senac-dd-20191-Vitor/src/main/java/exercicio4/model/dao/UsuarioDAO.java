@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 import exercicio4.model.vo.UsuarioVO;
 
 public class UsuarioDAO {
@@ -45,5 +47,20 @@ public class UsuarioDAO {
 			Banco.closeConnection(conn);
 		}
 		return resultado;
+	}
+
+	public int atualizarUsuario(UsuarioVO usuario) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public UsuarioVO consultarUsuarioPorNome(String nome) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<UsuarioVO> consultarTodos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
