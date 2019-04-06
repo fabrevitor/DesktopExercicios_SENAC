@@ -3,12 +3,16 @@ package exercicio4.view;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import exercicio4.controller.UsuarioController;
+import exercicio4.model.bo.NivelBO;
 import exercicio4.model.vo.NivelVO;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,7 +31,7 @@ public class TelaCadastroUsuario {
 	private JFrame frmCadastroDeUsuarios;
 	private JTextField txtNome;
 	private JTextField txtEmail;
-	private JComboBox cbNivel;
+	private JComboBox<Object> cbNivel;
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirmacaoSenha;
 	private List<NivelVO> niveis;
@@ -105,8 +109,8 @@ public class TelaCadastroUsuario {
 		frmCadastroDeUsuarios.getContentPane().add(pfConfirmacaoSenha);
 		
 		//Novo componente: Combobox
-		cbNivel = new JComboBox();
-		cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
+		cbNivel = new JComboBox<Object>();
+		cbNivel.setModel(new DefaultComboBoxModel<Object>(niveis.toArray()));
 		
 		//Inicia sem nada selecionado no combo
 		cbNivel.setSelectedIndex(-1);
@@ -130,27 +134,39 @@ public class TelaCadastroUsuario {
 		JButton button = new JButton("Salvar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
-				//1 - Ler os valores digitados nos campos da tela
 				
-				//2 - Chamar o método salvar(...) de UsuarioController, 
-				//passando os valores digitados
+				String nome = txtNome.getText();
+				String email = txtEmail.getText();
+				String senha = pfSenha.getText();
+				String senhaConfirmacao = pfConfirmacaoSenha.getText();
+				NivelVO nivel = (NivelVO) cbNivel.getSelectedItem();
 				
-				//3 - Mostrar a mensagem devolvida por UsuarioController na tela, 
-				//por exemplo com JOptionPane
+				UsuarioController controladoraUsuario = new UsuarioController();
+				String mensagem = controladoraUsuario.cadastrarUsuarioController(nome, email, nivel,senha);
+				
+				JOptionPane.showMessageDialog(null, mensagem);
+				
 			}
 		});
 		button.setBounds(20, 155, 160, 35);
 		frmCadastroDeUsuarios.getContentPane().add(button);
 	}
 	private void consultarNiveis() {
-		//TODO trocar para uma chamada ao BO de Nivel	
-		niveis = new ArrayList<NivelVO>();
+		
+		NivelBO nivelBO = new NivelBO();
+		
+		ArrayList<NivelVO> listaNiveis = new ArrayList<NivelVO>();
+		listaNiveis = nivelBO.consultarNiveisBO();
+		//DIVERSOS ERROS DE CONEXÃO COM O BANCO AO CHAMAR ESTE BO
+		
+		
+		
+		/*niveis = new ArrayList<NivelVO>();
 		
 		NivelVO nivelAdm = new NivelVO(1, "Administrador");
 		NivelVO nivelNormal = new NivelVO(2, "Normal");
 		
 		niveis.add(nivelAdm);
 		niveis.add(nivelNormal);
-	}
+	*/}
 }

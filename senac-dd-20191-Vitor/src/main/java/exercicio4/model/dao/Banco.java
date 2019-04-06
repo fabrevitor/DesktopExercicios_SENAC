@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 public class Banco {
-	private static final String driver = "com.mysql.jdbc.Driver";
+	private static final String driver = "com.mysql.cj.jdbc.Driver";
 	private static final String banco = "PROJETO1_DESKTOP";
 	private static final String conexao = "jdbc:mysql://localhost:3306/" + banco;
 	private static final String user = "root";
@@ -40,7 +40,7 @@ public class Banco {
 			Statement stmt = conn.createStatement();
 			return stmt;
 		} catch (SQLException e) {
-			System.out.println("Erro ao obter o Statement.");
+			System.out.println("Erro ao obter o Statement.Causa: " + e.getMessage());
 			return null;
 		}
 	}

@@ -1,24 +1,13 @@
 package exercicio4.controller;
 
-
 import exercicio4.model.bo.UsuarioBO;
-import exercicio4.model.vo.UsuarioVO;
+import exercicio4.model.vo.NivelVO;
 
 public class UsuarioController {
-	public String cadastrarUsuarioController(String nome, String email, String senha, int idNivel) {
-		String mensagem = "";
-		
-		//mensagem = validarCampos(nome,preco);
-		if(mensagem == "") {
-			UsuarioVO novoUsuario = new UsuarioVO();
-			novoUsuario.setNome(nome);
-			novoUsuario.setEmail(email);
-			novoUsuario.setSenha(senha);
-			novoUsuario.getNivel().setId(idNivel);
-			
-			UsuarioBO bo = new UsuarioBO();
-			mensagem = bo.cadastrar(novoUsuario);
-		}
-	return mensagem;
+	public String cadastrarUsuarioController(String nome, String email, NivelVO nivel, String senha) {
+String mensagem = "";
+			UsuarioBO usuarioBO = new UsuarioBO();
+			mensagem = usuarioBO.cadastrar(nome,email,nivel,senha);
+			return mensagem;
 	}
 }

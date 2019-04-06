@@ -9,6 +9,10 @@ public class NivelVO{
 		this.id = id;
 		this.descricao = descricao;
 	}
+	public NivelVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}

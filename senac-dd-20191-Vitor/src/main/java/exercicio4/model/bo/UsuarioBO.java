@@ -1,61 +1,35 @@
 package exercicio4.model.bo;
 
-import java.util.ArrayList;
-
 import exercicio4.model.dao.UsuarioDAO;
+import exercicio4.model.vo.NivelVO;
 import exercicio4.model.vo.UsuarioVO;
 
 public class UsuarioBO {
 	
-	public String cadastrar(UsuarioVO novoUsuario) {
-		
+	public String cadastrar(String nome, String email, NivelVO nivel, String senha) {
 		String mensagem = "";
 		UsuarioDAO uDAO = new UsuarioDAO();
-		if(uDAO.existeRegistroPorNome(novoUsuario.getNome())) {
+		if(uDAO.existeRegistroPorNome(nome)) {
 			mensagem = "Já existe usuário cadastrado com este nome: "
-					+ novoUsuario.getNome();
-		} else {
-			int statusPersistencia = uDAO.cadastrarUsuarioDAO(novoUsuario);
-			
-			if(statusPersistencia == 1) {
-				mensagem = "Usuário salvo com sucesso!";
-			} else if (statusPersistencia == 0) {
-				mensagem = "Erro ao salvar Usuário.";
-			}
-		}
-	return mensagem;
-	}
-	public String atualizar(UsuarioVO usuario) {
-		String mensagem = "";
-		UsuarioDAO uDAO = new UsuarioDAO();
+					+ nome;
+		}  
+		if(nome.trim().length() <= 3) {
+			mensagem = "Nome tem que ter mais de 3 caracteres!";
+		}	
 		
-		if(usuario == null) {
-			mensagem = "Usuário está nulo, favor preencher.";
-		} else if (usuario.getId() > 0) {
-			mensagem = "Usuário deve possuir um id, erro ao consultar!";
+		if(senha.length() < 6) {
+			mensagem = "Senha inválida. Deve ter pelo menos 6 caracteres.";
 		}
 		
-		if(uDAO.existeRegistroPorNome(usuario.getNome())) {
-			mensagem = "Já existe usuário cadastrado com este nome: " + usuario.getNome();
-		} else {
-			int statusPersistencia = uDAO.atualizarUsuario(usuario);
-			
-			if(statusPersistencia == 1) {
-				mensagem = "Usuário atualizado com sucesso!";
-			} else if(statusPersistencia == 0) {
-				mensagem = "Erro ao atualizar dados.";
-			}
-		}
+		if(mensagem == "") {
+			UsuarioVO usuarioVO = new UsuarioVO(nome, email, senha, nivel);
+				int statusPersistencia = uDAO.cadastrarUsuarioDAO(usuarioVO);
+				if(statusPersistencia == 1) {
+					mensagem = "Usuário salvo com sucesso!";
+				} else if (statusPersistencia == 0) {
+					mensagem = "Erro ao salvar Usuário.";
+				}
+			}	
 	return mensagem;
 	}
-	public UsuarioVO consultarUsuarioPorNome(String nome) {
-			UsuarioDAO dao = new UsuarioDAO();
-			return dao.consultarUsuarioPorNome(nome);
-	}
-	
-	public ArrayList<UsuarioVO> consultarTodos(){
-		UsuarioDAO dao = new UsuarioDAO();
-		return dao.consultarTodos();
-	}
-	
 }
