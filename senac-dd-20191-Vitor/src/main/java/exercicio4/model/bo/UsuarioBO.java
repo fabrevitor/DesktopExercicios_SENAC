@@ -1,5 +1,8 @@
 package exercicio4.model.bo;
 
+import java.util.ArrayList;
+
+import exercicio4.model.dao.Banco;
 import exercicio4.model.dao.UsuarioDAO;
 import exercicio4.model.vo.NivelVO;
 import exercicio4.model.vo.UsuarioVO;
@@ -31,5 +34,24 @@ public class UsuarioBO {
 				}
 			}	
 	return mensagem;
+	}
+
+	public String excluirBO(UsuarioVO selectedItem) {
+		String mensagem = "";
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		int codigoRetorno = dao.excluirUsuarioDAO(selectedItem);
+		
+		if(codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO_EXCLUSAO) {
+			mensagem = "Usuário" + selectedItem.toString() + " excluído com sucesso!";
+		} else {
+			mensagem = "Erro ao excluir usuário!";
+		}
+		return mensagem;
+	}
+
+	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.consultarTodosUsuariosDAO(); 
 	}
 }

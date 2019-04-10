@@ -17,6 +17,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import exercicio4.model.bo.NivelBO;
 import exercicio4.model.vo.NivelVO;
 import exercicio4.model.vo.UsuarioVO;
 /**
@@ -161,12 +163,7 @@ public class TelaListagemUsuario {
 
 	private void consultarNiveis() {
 		//TODO trocar para uma chamada ao BO de Nivel	
-		niveis = new ArrayList<NivelVO>();
-
-		NivelVO nivelAdm = new NivelVO(1, "Administrador");
-		NivelVO nivelNormal = new NivelVO(2, "Normal");
-
-		niveis.add(nivelAdm);
-		niveis.add(nivelNormal);
+		NivelBO nivelBO = new NivelBO();
+		niveis = nivelBO.consultarNiveisBO();
 	}
 }

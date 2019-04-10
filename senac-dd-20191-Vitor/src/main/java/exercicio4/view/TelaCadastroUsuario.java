@@ -19,14 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-/**
- * 
- * Tela de cadastro de usuários (item 1a da Atividade 4)
- * 
- * @author Vilmar César Pereira Júnior
- *
- */
-
 public class TelaCadastroUsuario {
 	private JFrame frmCadastroDeUsuarios;
 	private JTextField txtNome;
@@ -108,6 +100,7 @@ public class TelaCadastroUsuario {
 		pfConfirmacaoSenha.setBounds(260, 84, 90, 28);
 		frmCadastroDeUsuarios.getContentPane().add(pfConfirmacaoSenha);
 		
+		consultarNiveis();
 		//Novo componente: Combobox
 		cbNivel = new JComboBox<Object>();
 		cbNivel.setModel(new DefaultComboBoxModel<Object>(niveis.toArray()));
@@ -152,21 +145,7 @@ public class TelaCadastroUsuario {
 		frmCadastroDeUsuarios.getContentPane().add(button);
 	}
 	private void consultarNiveis() {
-		
 		NivelBO nivelBO = new NivelBO();
-		
-		ArrayList<NivelVO> listaNiveis = new ArrayList<NivelVO>();
-		listaNiveis = nivelBO.consultarNiveisBO();
-		//DIVERSOS ERROS DE CONEXÃO COM O BANCO AO CHAMAR ESTE BO
-		
-		
-		
-		/*niveis = new ArrayList<NivelVO>();
-		
-		NivelVO nivelAdm = new NivelVO(1, "Administrador");
-		NivelVO nivelNormal = new NivelVO(2, "Normal");
-		
-		niveis.add(nivelAdm);
-		niveis.add(nivelNormal);
-	*/}
+		niveis = nivelBO.consultarNiveisBO();
+	}
 }

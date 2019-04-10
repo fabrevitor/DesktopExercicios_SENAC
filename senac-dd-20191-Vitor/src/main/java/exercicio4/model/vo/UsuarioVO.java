@@ -50,9 +50,10 @@ public class UsuarioVO{
 	}
 	@Override
 	public String toString() {
-		return "ID: " + id + "\nNome: " + nome + 
+		return "ID: " + id + 
+				"\nNome: " + nome + 
 				"\nEmail: " + email + 
 				"\nSenha: " + senha + 
-				 nivel.toString();
+				nivel.toString();
 	}
 }
