@@ -39,8 +39,8 @@ public class UsuarioVO{
 	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha(String string) {
+		this.senha = string;
 	}
 	public NivelVO getNivel() {
 		return nivel;
@@ -53,7 +53,6 @@ public class UsuarioVO{
 		return "ID: " + id + 
 				"\nNome: " + nome + 
 				"\nEmail: " + email + 
-				"\nSenha: " + senha + 
-				nivel.toString();
+				this.nivel.toString();
 	}
 }

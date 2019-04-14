@@ -5,15 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +29,7 @@ public class TelaListagemUsuario {
 
 	private JFrame frmCadastroDeUsuarios;
 	private JTextField txtNome;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbNivel;
 	private List<NivelVO> niveis;
 	private JTable tblUsuarios;
@@ -62,10 +60,10 @@ public class TelaListagemUsuario {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initialize() {
 
-		//TODO consultar os níveis no banco (criei na mão aqui :D)
-		consultarNiveis(); //TODO alterar esta chamada AQUI
+		consultarNiveis();
 
 		frmCadastroDeUsuarios = new JFrame();
 		frmCadastroDeUsuarios.setTitle("Consulta de usuários");
@@ -109,7 +107,7 @@ public class TelaListagemUsuario {
 		btnConsultarPorNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Chamar o método do controller: consultarPorNome(String nome)
-
+				
 				//Mostrar na tabela a lista retornada
 				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
 				

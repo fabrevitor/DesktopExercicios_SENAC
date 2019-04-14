@@ -3,15 +3,24 @@ package exercicio4.controller;
 import java.util.ArrayList;
 
 import exercicio4.model.bo.UsuarioBO;
+import exercicio4.model.dao.UsuarioDAO;
 import exercicio4.model.vo.NivelVO;
 import exercicio4.model.vo.UsuarioVO;
 
 public class UsuarioController {
-	public String cadastrarUsuarioController(String nome, String email, NivelVO nivel, String senha) {
-			String mensagem = "";
-			UsuarioBO usuarioBO = new UsuarioBO();
-			mensagem = usuarioBO.cadastrar(nome,email,nivel,senha);
-			return mensagem;
+	private boolean validarCampo(String campo) {
+		if (campo.trim() == "" || campo == null  ) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public String cadastrarUsuarioController(String nome, String email, NivelVO nivel, String senha, String senhaConfirmacao) {
+		String mensagem = "";
+		UsuarioBO usuarioBO = new UsuarioBO();
+		mensagem = usuarioBO.cadastrar(nome,email,nivel,senha, senhaConfirmacao);
+		return mensagem;
 	}
 
 	public String excluirUsuarioController(UsuarioVO selectedItem) {
@@ -25,7 +34,27 @@ public class UsuarioController {
 		}
 		return mensagem;
 	}
-
+	public String isAdminController(String email, String senha) {
+		String mensagem = "";
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		UsuarioBO usuarioBO = new UsuarioBO();
+		
+		if(this.validarCampo(email) || this.validarCampo(senha)){
+			if(usuarioDAO.existeRegistroPorEmail(email)) {
+				if(usuarioBO.isAdminBO(email, senha).getNivel().getId() == 1) {
+					mensagem = "";
+				}else {
+					mensagem = "O usuário informado não é Admin.";
+				}
+			} else {
+				mensagem = "Email não corresponde a nenhum usuário!";
+			}
+			
+		} else {
+			mensagem = "Email ou senha estão incorretos!!";
+		}
+		return mensagem;
+	}
 	public ArrayList<UsuarioVO> consultarTodosUsuariosController() {
 		UsuarioBO bo = new UsuarioBO();
 		return bo.consultarTodosUsuariosBO();
