@@ -138,4 +138,60 @@ public class UsuarioDAO {
 		}
 		return usuarioVO;
 	}
+	public ArrayList<UsuarioVO> listarUsuariosNivelDAO(String descricao) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+		String query = "SELECT * FROM USUARIO INNER JOIN NIVEL ON USUARIO.ID_NIVEL = NIVEL.ID_NIVEL WHERE NIVEL.DESCRICAO ='" + descricao + "'";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				UsuarioVO usuarioVO = new UsuarioVO();
+				usuarioVO.setId(resultado.getInt(1));
+				usuarioVO.setNome(resultado.getString(2));
+				usuarioVO.setEmail(resultado.getString(3));
+				usuarioVO.setSenha(resultado.getString(4));
+				NivelVO nivelVO = new NivelVO();
+				nivelVO.setDescricao(resultado.getString(7));
+				usuarioVO.setNivel(nivelVO);  
+				usuarios.add(usuarioVO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a query de listar usuarios por nivel.");
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuarios;
+	}
+	public ArrayList<UsuarioVO> listarUsuariosNomeDAO(String text) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+		String query = "SELECT * FROM USUARIO WHERE NOME LIKE'%" + text + "%'";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				UsuarioVO usuarioVO = new UsuarioVO();
+				usuarioVO.setId(resultado.getInt(1));
+				usuarioVO.setNome(resultado.getString(2));
+				usuarioVO.setEmail(resultado.getString(3));
+				usuarioVO.setSenha(resultado.getString(4));
+				NivelVO nivelVO = new NivelVO();
+				nivelVO.setId(resultado.getInt(5));
+				usuarioVO.setNivel(nivelVO);
+				usuarios.add(usuarioVO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a query de listar usuarios por nome.");
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuarios;
+	}
 }

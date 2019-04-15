@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import exercicio4.controller.UsuarioController;
 import exercicio4.model.bo.NivelBO;
 import exercicio4.model.vo.NivelVO;
 import exercicio4.model.vo.UsuarioVO;
@@ -97,7 +98,20 @@ public class TelaListagemUsuario {
 		JButton btnConsultarPorNivel = new JButton("Consultar por nível");
 		btnConsultarPorNivel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+				
+				UsuarioController controller = new UsuarioController();
+				NivelVO nivelVO = new NivelVO();
+				nivelVO = (NivelVO) cbNivel.getSelectedItem();
+				usuarios = controller.listarUsuariosNivelController(nivelVO.getDescricao());
+				
+				DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+				Object linha[] = new Object[2];
+				for(int i = 0; i < usuarios.size(); i++) {
+					linha[0] = usuarios.get(i).getId();
+					linha[1] = usuarios.get(i).getNome();
+					model.addRow(linha);
+				}
 			}
 		});
 		btnConsultarPorNivel.setBounds(390, 49, 160, 30);
@@ -106,13 +120,17 @@ public class TelaListagemUsuario {
 		JButton btnConsultarPorNome = new JButton("Consultar por nome");
 		btnConsultarPorNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Chamar o método do controller: consultarPorNome(String nome)
+				ArrayList<UsuarioVO> usuarios = new ArrayList <UsuarioVO>();
+				UsuarioController controller = new UsuarioController();
+				usuarios = controller.listarUsuariosNomeController(txtNome.getText());
 				
-				//Mostrar na tabela a lista retornada
-				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
-				
-				//Chamar sempre que for atualizar a tabela com os usuários
-				atualizarTabelaUsuarios(usuarios);
+				DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+				Object linha[] = new Object[2];
+				for(int i = 0; i < usuarios.size(); i++) {
+					linha[0] = usuarios.get(i).getId();
+					linha[1] = usuarios.get(i).getNome();
+					model.addRow(linha);
+				}
 			}
 		});
 		btnConsultarPorNome.setBounds(390, 14, 160, 30);
@@ -121,16 +139,38 @@ public class TelaListagemUsuario {
 		JButton btnConsultarTodos = new JButton("Consultar todos");
 		btnConsultarTodos.setBounds(70, 85, 240, 30);
 		frmCadastroDeUsuarios.getContentPane().add(btnConsultarTodos);
+		btnConsultarTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+				
+				UsuarioController controller = new UsuarioController();
+				usuarios = controller.consultarTodosUsuariosController();
+				
+				DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+				Object linha[] = new Object[2];
+				for(int i = 0; i < usuarios.size(); i++) {
+					linha[0] = usuarios.get(i).getId();
+					linha[1] = usuarios.get(i).getNome();
+					model.addRow(linha);
+				}
+			}
+		}
+		);
 
 		JButton btnLimpar = new JButton("Limpar");
+		frmCadastroDeUsuarios.getContentPane().add(btnLimpar);
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNome.setText("");
+				cbNivel.setSelectedIndex(-1);
+			}
+		});
 		btnLimpar.setBounds(310, 85, 240, 30);
 		frmCadastroDeUsuarios.getContentPane().add(btnLimpar);
-
-		//Novo componente: tabela
+		
 		tblUsuarios = new JTable();
 		tblUsuarios.setVisible(true);
 
-		//Cria a tabela vazia apenas com as colunas
 		tblUsuarios.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"id", "Nome"},
@@ -143,11 +183,6 @@ public class TelaListagemUsuario {
 		tblUsuarios.setBounds(70, 120, 480, 230);
 		frmCadastroDeUsuarios.getContentPane().add(tblUsuarios);
 	}
-
-	/**
-	 * Atualiza o JTable de usuários.
-	 * @param usuarios
-	 */
 	protected void atualizarTabelaUsuarios(ArrayList<UsuarioVO> usuarios) {
 		DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
 		
@@ -158,9 +193,7 @@ public class TelaListagemUsuario {
 			model.addRow(novaLinha);
 		}
 	}
-
 	private void consultarNiveis() {
-		//TODO trocar para uma chamada ao BO de Nivel	
 		NivelBO nivelBO = new NivelBO();
 		niveis = nivelBO.consultarNiveisBO();
 	}

@@ -15,9 +15,9 @@ public class UsuarioController {
 			return true;
 		}
 	}
-	
 	public String cadastrarUsuarioController(String nome, String email, NivelVO nivel, String senha, String senhaConfirmacao) {
 		String mensagem = "";
+		
 		UsuarioBO usuarioBO = new UsuarioBO();
 		mensagem = usuarioBO.cadastrar(nome,email,nivel,senha, senhaConfirmacao);
 		return mensagem;
@@ -49,7 +49,6 @@ public class UsuarioController {
 			} else {
 				mensagem = "Email não corresponde a nenhum usuário!";
 			}
-			
 		} else {
 			mensagem = "Email ou senha estão incorretos!!";
 		}
@@ -58,5 +57,13 @@ public class UsuarioController {
 	public ArrayList<UsuarioVO> consultarTodosUsuariosController() {
 		UsuarioBO bo = new UsuarioBO();
 		return bo.consultarTodosUsuariosBO();
+	}
+	public ArrayList<UsuarioVO> listarUsuariosNivelController(String descricao) {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.listarUsuariosNivelBO(descricao);
+	}
+	public ArrayList<UsuarioVO> listarUsuariosNomeController(String text) {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.listarUsuariosNomeBO(text);
 	}
 }

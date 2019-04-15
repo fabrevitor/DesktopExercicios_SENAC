@@ -69,4 +69,14 @@ public class UsuarioBO {
 
 		return usuarioVO;
 	}
+
+	public ArrayList<UsuarioVO> listarUsuariosNivelBO(String descricao) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.listarUsuariosNivelDAO(descricao);
+	}
+
+	public ArrayList<UsuarioVO> listarUsuariosNomeBO(String text) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.listarUsuariosNomeDAO(text);
+	}
 }
