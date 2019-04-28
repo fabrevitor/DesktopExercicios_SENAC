@@ -1,22 +1,29 @@
 package exercicio4.view;
 
 import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 import exercicio4.controller.UsuarioController;
 import exercicio4.model.bo.NivelBO;
 import exercicio4.model.vo.NivelVO;
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class TelaCadastroUsuario {
 	private JFrame frmCadastroDeUsuarios;
@@ -39,65 +46,67 @@ public class TelaCadastroUsuario {
 			}
 		});
 	}
+
 	public TelaCadastroUsuario() {
 		initialize();
 	}
+
 	private void initialize() {
 		consultarNiveis();
 
 		frmCadastroDeUsuarios = new JFrame();
+		frmCadastroDeUsuarios.getContentPane().setBackground(SystemColor.menu);
 		frmCadastroDeUsuarios.setTitle("Cadastro de usuários");
-		frmCadastroDeUsuarios.setBounds(100, 100, 370, 220);
+		frmCadastroDeUsuarios.setBounds(100, 100, 424, 230);
 		frmCadastroDeUsuarios.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCadastroDeUsuarios.getContentPane().setLayout(null);
+		frmCadastroDeUsuarios.getContentPane()
+				.setLayout(new FormLayout(
+						new ColumnSpec[] { ColumnSpec.decode("46px"), ColumnSpec.decode("140px"),
+								FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("15px"),
+								FormSpecs.UNRELATED_GAP_COLSPEC, ColumnSpec.decode("69px"),
+								FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("90px"), },
+						new RowSpec[] { FormSpecs.PARAGRAPH_GAP_ROWSPEC, RowSpec.decode("28px"),
+								FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("28px"), FormSpecs.RELATED_GAP_ROWSPEC,
+								RowSpec.decode("29px"), FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("28px"),
+								FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("35px"), }));
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(20, 20, 55, 15);
-		frmCadastroDeUsuarios.getContentPane().add(lblNome);
+		frmCadastroDeUsuarios.getContentPane().add(lblNome, "1, 2, left, center");
 
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(20, 55, 55, 15);
-		frmCadastroDeUsuarios.getContentPane().add(lblEmail);
+		frmCadastroDeUsuarios.getContentPane().add(lblEmail, "1, 4, left, center");
 
 		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(20, 90, 55, 15);
-		frmCadastroDeUsuarios.getContentPane().add(lblSenha);
+		frmCadastroDeUsuarios.getContentPane().add(lblSenha, "1, 6, left, center");
 
 		JLabel lblConfirmaoDeSenha = new JLabel("Confirmação:");
 		lblConfirmaoDeSenha.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConfirmaoDeSenha.setBounds(165, 90, 94, 16);
-		frmCadastroDeUsuarios.getContentPane().add(lblConfirmaoDeSenha);
-
-		JLabel lblNivel = new JLabel("Nível:");
-		lblNivel.setBounds(20, 125, 55, 15);
-		frmCadastroDeUsuarios.getContentPane().add(lblNivel);
+		frmCadastroDeUsuarios.getContentPane().add(lblConfirmaoDeSenha, "4, 6, 3, 1, fill, center");
 
 		txtNome = new JTextField();
-		txtNome.setBounds(70, 15, 280, 28);
-		frmCadastroDeUsuarios.getContentPane().add(txtNome);
+		frmCadastroDeUsuarios.getContentPane().add(txtNome, "2, 2, 7, 1, fill, fill");
 		txtNome.setColumns(10);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(70, 50, 280, 28);
-		frmCadastroDeUsuarios.getContentPane().add(txtEmail);
+		frmCadastroDeUsuarios.getContentPane().add(txtEmail, "2, 4, 7, 1, fill, fill");
 		txtEmail.setColumns(10);
 
 		pfSenha = new JPasswordField();
-		pfSenha.setBounds(70, 85, 90, 28);
-		frmCadastroDeUsuarios.getContentPane().add(pfSenha);
+		frmCadastroDeUsuarios.getContentPane().add(pfSenha, "2, 6, fill, fill");
 
 		pfConfirmacaoSenha = new JPasswordField();
-		pfConfirmacaoSenha.setBounds(260, 84, 90, 28);
-		frmCadastroDeUsuarios.getContentPane().add(pfConfirmacaoSenha);
+		frmCadastroDeUsuarios.getContentPane().add(pfConfirmacaoSenha, "7, 6, 2, 1, fill, fill");
 
 		consultarNiveis();
+
+		JLabel lblNivel = new JLabel("Nível:");
+		lblNivel.setForeground(SystemColor.textHighlight);
+		frmCadastroDeUsuarios.getContentPane().add(lblNivel, "1, 8, left, center");
 		cbNivel = new JComboBox<Object>();
 		cbNivel.setModel(new DefaultComboBoxModel<Object>(niveis.toArray()));
 
 		cbNivel.setSelectedIndex(-1);
-
-		cbNivel.setBounds(70, 120, 280, 28);
-		frmCadastroDeUsuarios.getContentPane().add(cbNivel);
+		frmCadastroDeUsuarios.getContentPane().add(cbNivel, "2, 8, 7, 1, fill, fill");
 
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
@@ -109,8 +118,7 @@ public class TelaCadastroUsuario {
 				cbNivel.setSelectedIndex(-1);
 			}
 		});
-		btnLimpar.setBounds(190, 155, 160, 35);
-		frmCadastroDeUsuarios.getContentPane().add(btnLimpar);
+		frmCadastroDeUsuarios.getContentPane().add(btnLimpar, "6, 10, 3, 1, fill, fill");
 
 		JButton button = new JButton("Salvar");
 		button.addActionListener(new ActionListener() {
@@ -120,19 +128,21 @@ public class TelaCadastroUsuario {
 				String email = txtEmail.getText();
 				String senha = String.copyValueOf(pfSenha.getPassword());
 				String senhaConfirmacao = String.copyValueOf(pfConfirmacaoSenha.getPassword());
-				// MÉTODO GetPass SEM MUDAR A SENHA PARA CHAR[] : String.valueOf(passwordField.getPassword());
+				// MÉTODO GetPass SEM MUDAR A SENHA PARA CHAR[] :
+				// String.valueOf(passwordField.getPassword());
 				NivelVO nivel = (NivelVO) cbNivel.getSelectedItem();
-				
+
 				UsuarioController controladoraUsuario = new UsuarioController();
-				String mensagem = controladoraUsuario.cadastrarUsuarioController(nome, email, nivel,senha, senhaConfirmacao);
+				String mensagem = controladoraUsuario.cadastrarUsuarioController(nome, email, nivel, senha,
+						senhaConfirmacao);
 
 				JOptionPane.showMessageDialog(null, mensagem);
 
 			}
 		});
-		button.setBounds(20, 155, 160, 35);
-		frmCadastroDeUsuarios.getContentPane().add(button);
+		frmCadastroDeUsuarios.getContentPane().add(button, "2, 10, 3, 1, fill, fill");
 	}
+
 	private void consultarNiveis() {
 		NivelBO nivelBO = new NivelBO();
 		niveis = nivelBO.consultarNiveisBO();
